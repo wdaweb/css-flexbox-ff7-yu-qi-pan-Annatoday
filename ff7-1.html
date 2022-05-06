@@ -7,9 +7,11 @@
   <title>Document</title>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
   <style>
-    /* h1一個用% 一個px 實驗跑版: 文字不影響(px即可)*/
-    /* 嘗試偽元素當遮罩，原是inline轉型block會出現。未脫離流向，會擠開其他元素，未定位Z-index也失效(Z-index僅能在定位元素上奏效)
-        改用漸層，記得順序位置(圖畫紙) */
+    /* 人物圖片一個% 一個px 實驗跑版(未) */
+    /* h1一個用% 一個px 實驗跑版 => 文字不影響(px即可)*/
+    /* 嘗試偽元素當遮罩，原是inline轉型block會出現。未脫離流向，會擠開其他元素，未定位Z-index也失效(Z-index僅能在定位元素上奏效)。
+       改用漸層，記得順序位置(圖畫紙) */
+    /* 人物嘗試不同方式做，cloud:flex,tifa:背景 */
     /* 剩: 選擇器? 文字顏色、字型、h1跟p */
     *{
       margin: 0;
@@ -24,6 +26,7 @@
       background: 
       linear-gradient(180deg,#41434511 0%,rgb(5, 5, 5) 100%),
       url(./images-ff7/bg-full.jpg) no-repeat center center/cover;
+
       display: flex;
       flex-direction: row;
       justify-content: center;
@@ -33,13 +36,13 @@
       width: 75%;
       height: 75%;
       border: 1px solid gray;
+
       display: flex;
       flex-direction: row;
       justify-content: flex-start;
       overflow: hidden;
     }
     .left{
-      /* 背景 */
       background: url(./images-ff7/main.jpg) no-repeat center center/cover;
       width: 50%;
       height: 100%;
@@ -55,8 +58,8 @@
       align-items: center;
     }
     .left img{
-      width: 280px;
-      height: 450px;
+      width: 260px;
+      height: 400px;
     }
     .left h1, p{
       color: pink ; 
@@ -65,16 +68,14 @@
       font-size: 50px;
     }
     .left .card p{
-      /* font-size: 150% ?; */
       font-size: 25px;
       margin: 5px;
       width: 70%;
       /* 改center? */
-      text-align:justify;
+      text-align: center;
     }
-/* 右邊區域 */
+
     .right{
-      /* background-color: blueviolet; */
       width: 50%;
       height: 100%;
       display: flex;
@@ -89,6 +90,7 @@
       /* width: 100%;不影響 */
       height: 100%;
       background: rgb(176, 177, 176);
+      
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -97,9 +99,8 @@
     }
     .boy img{
       width: 38%;
-      height: 90%;
-      /* width: 250px;
-      height: 300px; */
+      height: 100%;
+
       align-self: flex-end;
       margin-bottom: -50px;
       /* flex-shrink: 1; 研究中*/
@@ -114,17 +115,14 @@
       font-size: 25px;
       width: 57%;
     }
-    /* .girl .card{
-      text-align: left;
-    } */
+    
     .girl{
-      /* width: 100%; */
       height: 100%;
       background: black;
       
       background-image: url(./images-ff7/tifa.png);
       /* tifa當背景+用 % 才不會跑版 */
-      background-size: 38% 90%;
+      background-size: 36% 90%;
       background-repeat: no-repeat;
       background-position: 20px bottom;
 
@@ -132,17 +130,16 @@
       flex-direction: column;
       justify-content: center;
       align-items: flex-start;
-      /* text-align: left; 無效*/
     }
     .girl h1 {
       color: white;
-      font-size: 350%;
-      margin-left: 36%;
+      font-size: 50px;
+      margin-left: 34%;
     }
     .girl p{
       font-size: 25px;
       width: 60%;
-      margin-left: 36%;
+      margin-left: 34%;
     }
 
   </style>
@@ -154,7 +151,7 @@
       <div class="card">
         <img src="./images-ff7/ps4-ff7.png">
         <h1>AVAILABLE NOW</h1>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consectetur velit accusantium dolorem hic facere vero in, totam dolore quos fugit nobis, obcaecati omnis, repellendus doloremque saepe vitae quasi impedit nam?</p>
+        <p>Lorem, ipsum ectetu adipisicing elit. Consectetur velit accusantium dolorem hic facere vero in, totam dolore quos fulit nobis, obcaecati omnis, repellendus doloremque saepe impedit nam?</p>
       </div>
     </div>
 
