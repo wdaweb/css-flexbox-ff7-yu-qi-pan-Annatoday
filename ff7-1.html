@@ -7,9 +7,10 @@
   <title>Document</title>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
   <style>
-    /* .boy h1一個用% 一個px 實驗跑版 */
-    /* 嘗試偽元素當遮罩，原是inline轉型block會出現。未脫離流向，會擠開其他元素，未定位Z-index也失效(Z-index僅能在定位元素上奏效) */
-    /* 剩: 文字顏色、字型、h1跟p選擇器 ? */
+    /* h1一個用% 一個px 實驗跑版: 文字不影響(px即可)*/
+    /* 嘗試偽元素當遮罩，原是inline轉型block會出現。未脫離流向，會擠開其他元素，未定位Z-index也失效(Z-index僅能在定位元素上奏效)
+        改用漸層，記得順序位置(圖畫紙) */
+    /* 剩: 選擇器? 文字顏色、字型、h1跟p */
     *{
       margin: 0;
       padding: 0;
@@ -21,8 +22,8 @@
       width: 100%;
       height: 100%;
       background: 
+      linear-gradient(180deg,#41434511 0%,rgb(5, 5, 5) 100%),
       url(./images-ff7/bg-full.jpg) no-repeat center center/cover;
-      /* linear-gradient(0deg,#41434511 0%,transparent 50%,rgba(0, 0, 0, 0.719) 100%); */
       display: flex;
       flex-direction: row;
       justify-content: center;
@@ -31,6 +32,7 @@
     .container{
       width: 75%;
       height: 75%;
+      border: 1px solid gray;
       display: flex;
       flex-direction: row;
       justify-content: flex-start;
@@ -46,7 +48,7 @@
       width: 100%;
       height: 100%;
       /* 遮罩 */
-      background: rgba(0, 0, 0, 0.4);
+      background: rgba(0, 0, 0, 0.559);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -57,7 +59,7 @@
       height: 450px;
     }
     .left h1, p{
-      color: pink;
+      color: pink ; 
     }
     .left .card h1{
       font-size: 50px;
@@ -86,7 +88,7 @@
     .boy{
       /* width: 100%;不影響 */
       height: 100%;
-      background: rgb(181, 176, 176);
+      background: rgb(176, 177, 176);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -94,7 +96,7 @@
       flex-wrap: wrap;
     }
     .boy img{
-      width: 40%;
+      width: 38%;
       height: 90%;
       /* width: 250px;
       height: 300px; */
@@ -105,13 +107,12 @@
     .boy h1{
       /* color: green; */
       margin-left: 5%;
-      width: 400px;
       font-size: 50px;
     }
     .boy p{
       margin-left: 50px;
       font-size: 25px;
-      width: 50%;
+      width: 57%;
     }
     /* .girl .card{
       text-align: left;
@@ -123,7 +124,7 @@
       
       background-image: url(./images-ff7/tifa.png);
       /* tifa當背景+用 % 才不會跑版 */
-      background-size: 40% 90%;
+      background-size: 38% 90%;
       background-repeat: no-repeat;
       background-position: 20px bottom;
 
