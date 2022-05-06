@@ -7,7 +7,9 @@
   <title>Document</title>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
   <style>
-    /* 剩Tifa 、 遮罩 偽元素會推開 、 文字對齊 、 people 要留嗎、tifa當看看背景、h1跟p選擇器 ? */
+    /* .boy h1一個用% 一個px 實驗跑版 */
+    /* 嘗試偽元素當遮罩，原是inline轉型block會出現。未脫離流向，會擠開其他元素，未定位Z-index也失效(Z-index僅能在定位元素上奏效) */
+    /* 剩: 文字顏色、字型、h1跟p選擇器 ? */
     *{
       margin: 0;
       padding: 0;
@@ -20,29 +22,22 @@
       height: 100%;
       background: 
       url(./images-ff7/bg-full.jpg) no-repeat center center/cover;
-      /* linear-gradient(180deg,#41434511 0%,transparent 75%,rgba(0, 0, 0, 0.521) 100%); */
+      /* linear-gradient(0deg,#41434511 0%,transparent 50%,rgba(0, 0, 0, 0.719) 100%); */
       display: flex;
       flex-direction: row;
       justify-content: center;
       align-items: center;
     }
-    /* body::after{
-      content: " ";
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.3);
-      z-index: 2;
-    } */
     .container{
-      /* background-color: palegoldenrod; */
       width: 75%;
-      height: 80%;
+      height: 75%;
       display: flex;
       flex-direction: row;
       justify-content: flex-start;
       overflow: hidden;
     }
     .left{
+      /* 背景 */
       background: url(./images-ff7/main.jpg) no-repeat center center/cover;
       width: 50%;
       height: 100%;
@@ -50,6 +45,7 @@
     .left .card{
       width: 100%;
       height: 100%;
+      /* 遮罩 */
       background: rgba(0, 0, 0, 0.4);
       display: flex;
       flex-direction: column;
@@ -57,17 +53,24 @@
       align-items: center;
     }
     .left img{
-      width: 160px;
-      height: 250px;
+      width: 280px;
+      height: 450px;
     }
-    .left .card h1, p{
-      color: white;
+    .left h1, p{
+      color: pink;
     }
-    .left .footer{
+    .left .card h1{
+      font-size: 50px;
+    }
+    .left .card p{
+      /* font-size: 150% ?; */
+      font-size: 25px;
       margin: 5px;
-      width: 400px;
+      width: 70%;
+      /* 改center? */
       text-align:justify;
     }
+/* 右邊區域 */
     .right{
       /* background-color: blueviolet; */
       width: 50%;
@@ -88,49 +91,59 @@
       flex-direction: column;
       justify-content: center;
       align-items: flex-start;
-      /* align-items: center; */
       flex-wrap: wrap;
     }
     .boy img{
-      width: 250px;
-      height: 300px;
+      width: 40%;
+      height: 90%;
+      /* width: 250px;
+      height: 300px; */
       align-self: flex-end;
       margin-bottom: -50px;
       /* flex-shrink: 1; 研究中*/
     }
-    .boy h1,p{
-      
-      margin-left: 20px;
+    .boy h1{
+      /* color: green; */
+      margin-left: 5%;
       width: 400px;
+      font-size: 50px;
     }
-    .girl .card{
+    .boy p{
+      margin-left: 50px;
+      font-size: 25px;
+      width: 50%;
+    }
+    /* .girl .card{
       text-align: left;
-    }
+    } */
     .girl{
       /* width: 100%; */
       height: 100%;
       background: black;
       
       background-image: url(./images-ff7/tifa.png);
-      background-size: 250px 300px;
+      /* tifa當背景+用 % 才不會跑版 */
+      background-size: 40% 90%;
       background-repeat: no-repeat;
       background-position: 20px bottom;
 
       display: flex;
       flex-direction: column;
       justify-content: center;
-      
+      align-items: flex-start;
       /* text-align: left; 無效*/
-      
     }
-    .girl h1,p{
+    .girl h1 {
       color: white;
+      font-size: 350%;
+      margin-left: 36%;
+    }
+    .girl p{
+      font-size: 25px;
+      width: 60%;
+      margin-left: 36%;
+    }
 
-    }
-    .girl img{
-      width: 250px;
-      height: 300px;
-    }
   </style>
 </head>
 <body>
@@ -138,14 +151,13 @@
 
     <div class="left">
       <div class="card">
-        <div class="header"><img src="./images-ff7/ps4-ff7.png"></div>
-        <div class="body"><h1>AVAILABLE NOW</h1></div>
-        <div class="footer"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consectetur velit accusantium dolorem hic facere vero in, totam dolore quos fugit nobis, obcaecati omnis, repellendus doloremque saepe vitae quasi impedit nam?</p></div>
+        <img src="./images-ff7/ps4-ff7.png">
+        <h1>AVAILABLE NOW</h1>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consectetur velit accusantium dolorem hic facere vero in, totam dolore quos fugit nobis, obcaecati omnis, repellendus doloremque saepe vitae quasi impedit nam?</p>
       </div>
     </div>
 
     <div class="right">
-
       <div class="card">
         <div class="boy">
           <h1>Cloud</h1>
