@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* 原本架構: 文字拉出container，自做flex。
+    發現文字垂直writing-mode後，Flex 元件流向也會跟著改變 : writing-mode: vertical-lr = flex-direction: column
+    or 直接用h1做也可以(自帶設定還在) */
+
+    *{
+      margin: 0;
+      padding: 0;
+      list-style: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body{
+      height: 100vh;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      font-family: "標楷體";
+      
+    }
+    .container{
+      /* border: 1px solid black; */
+      width: 1250px;
+      height: 1200px;
+
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    .center{
+      border: 1px solid black;
+      width: 1000px;
+      height: 1040px;
+
+      display: flex;
+      align-self: center;
+/* inside致中 */
+      align-items: center;
+      justify-content: center;
+    }
+    .left, .right{
+      /* border: 1px solid pink; */
+      width: 100px;
+      height: 1200px;
+/* 文字垂直 */
+      writing-mode: vertical-lr;
+      padding: 10px;
+      font-size: 3.4rem;
+      
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .inside{
+      width: 800px;
+      height: 900px;
+      border-right: 1px solid black;
+      border-top: 1px solid black;
+    }
+    /* 準備給上黑棋 */
+    .row-up{
+      width: 800px;
+      height: 400px;
+      /* border: 1px solid green; */
+    }
+    .row{
+      width: 800px;
+      height: 100px;
+      display: flex;
+    }
+    .col{
+      width: 100px;
+      height: 100px;
+      border-left: 1px solid black;
+      border-bottom: 1px solid black;
+    }
+    /* river */
+    .top{
+      border-top: 1px solid black;
+    }
+    .text-river{
+      font-size: 4rem;
+      width: 800px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+    /* transform: skew(49deg); */
+    .row-up .row:nth-child(1) .col:nth-child(4),
+    .row-up .row:nth-child(1) .col:nth-child(5){
+      background-color: pink;
+      /* transform: skew(49deg) */
+    }
+    .row-up .row:nth-child(2) .col:nth-child(4),
+    .row-up .row:nth-child(2) .col:nth-child(5){
+      background-color: pink;
+      /* transform: skew(49deg) */
+    }
+    .row-down .row:nth-child(3) .col:nth-child(4),
+    .row-down .row:nth-child(3) .col:nth-child(5){
+      background-color: pink;
+      /* transform: skew(49deg) */
+    }
+    .row-down .row:nth-child(4) .col:nth-child(4),
+    .row-down .row:nth-child(4) .col:nth-child(5){
+      background-color: pink;
+      /* transform: skew(49deg) */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="left">
+      <p>棋盤裡，車無輪，馬無疆，叫聲將軍堤防堤防</p>
+    </div>
+<!-- 中間棋盤 -->
+    <div class="center">
+      <div class="inside">
+        <!-- 上 -->
+        <div class="row-up">
+          <div class="row">
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col">1</div>
+            <div class="col">2</div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+          </div>
+          <div class="row">
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col">3</div>
+            <div class="col">4</div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+          </div>
+          <div class="row">
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+          </div>
+          <div class="row">
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+          </div>
+        </div>
+        <!-- 中 楚河漢界 -->
+        <div class="row-river">
+          <div class="row">
+            <div class="col-river" style="border-left: 1px solid black"></div>
+              <div class="text-river">
+                <p>楚河</p>
+                <p>漢界</p>
+              </div>
+          </div>
+        </div>
+        <!-- 下 -->
+        <div class="row-down">
+          <div class="row">
+            <div class="col top"></div>
+            <div class="col top"></div>
+            <div class="col top" ></div>
+            <div class="col top"></div>
+            <div class="col top"></div>
+            <div class="col top"></div>
+            <div class="col top"></div>
+            <div class="col top"></div>
+          </div>
+          <div class="row">
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+          </div>
+          <div class="row">
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col">1</div>
+            <div class="col">2</div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+          </div>
+          <div class="row">
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col">3</div>
+            <div class="col">4</div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="right">
+      <p>圖畫裡，龍不吟，虎不嘯，小小書僮可笑可笑</p>
+    </div>
+
+  </div>
+</body>
+</html>
