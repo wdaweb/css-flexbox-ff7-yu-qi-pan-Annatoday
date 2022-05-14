@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
-    /* 原本架構: 文字拉出container，自做flex。
+    /* 原本架構: 左右文字拉出container，做flex，後來練習也包進去
     發現文字垂直writing-mode後，Flex 元件流向也會跟著改變 : writing-mode: vertical-lr = flex-direction: column
-    or 直接用h1做也可以(自帶設定還在) */
+    or 直接用h1做也可以(注意h1自帶設定還在) */
+    /* 總寬度再計算 */
 
-    *{
+    * {
       margin: 0;
       padding: 0;
       list-style: 0;
@@ -18,111 +20,173 @@
     }
 
     html,
-    body{
+    body {
       height: 100vh;
       display: flex;
       flex-direction: row;
+      /* 置中 */
       justify-content: center;
       align-items: center;
       font-family: "標楷體";
-      
+
     }
-    .container{
+
+    .container {
       /* border: 1px solid black; */
       width: 1250px;
       height: 1200px;
 
       display: flex;
-      flex-direction: row;
       justify-content: space-between;
+      /* 從左右文字置中 */
+      align-items: center
     }
-    .center{
+
+    .center {
       border: 1px solid black;
       width: 1000px;
       height: 1040px;
 
       display: flex;
-      align-self: center;
-/* inside致中 */
-      align-items: center;
       justify-content: center;
+      /* 子元素(內棋盤)置中 */
+      align-items: center;
     }
-    .left, .right{
+
+    /* 各自都是彈性盒 */
+    .left,
+    .right {
       /* border: 1px solid pink; */
       width: 100px;
       height: 1200px;
-/* 文字垂直 */
+      /* 文字垂直後 流向變column */
       writing-mode: vertical-lr;
-      padding: 10px;
       font-size: 3.4rem;
-      
+
       display: flex;
       justify-content: center;
       align-items: center;
     }
-    .inside{
+
+    .inside {
       width: 800px;
       height: 900px;
+      /* 棋盤格外框上+右 */
       border-right: 1px solid black;
       border-top: 1px solid black;
     }
+
     /* 準備給上黑棋 */
-    .row-up{
+    .row-up {
       width: 800px;
       height: 400px;
       /* border: 1px solid green; */
     }
-    .row{
+
+    .row {
       width: 800px;
       height: 100px;
       display: flex;
     }
-    .col{
+
+    .col {
       width: 100px;
       height: 100px;
+      /* 棋盤格內框左+下 */
       border-left: 1px solid black;
       border-bottom: 1px solid black;
     }
+
     /* river */
-    .top{
+    .top {
       border-top: 1px solid black;
     }
-    .text-river{
+
+    .text-river {
       font-size: 4rem;
       width: 800px;
+
       display: flex;
       justify-content: space-around;
+      /* 楚河漢界置中 */
       align-items: center;
     }
-    /* transform: skew(49deg); */
+
+    /* 斜線(上游) 讓偽元素定位 */
     .row-up .row:nth-child(1) .col:nth-child(4),
-    .row-up .row:nth-child(1) .col:nth-child(5){
-      background-color: pink;
-      /* transform: skew(49deg) */
-    }
+    .row-up .row:nth-child(1) .col:nth-child(5),
     .row-up .row:nth-child(2) .col:nth-child(4),
-    .row-up .row:nth-child(2) .col:nth-child(5){
-      background-color: pink;
-      /* transform: skew(49deg) */
+    .row-up .row:nth-child(2) .col:nth-child(5) {
+      position: relative;
     }
+
+    /* 斜線\ */
+    .row-up .row:nth-child(1) .col:nth-child(4)::before,
+    .row-up .row:nth-child(2) .col:nth-child(5)::before {
+      content: '';
+      position: absolute;
+      /* why不需高度也沒影響=> border粗細已設定?*/
+      /* height: 500px; */
+      width: 140px;
+      border-top: 1px solid black;
+      /* 旋轉原點 */
+      transform-origin: left top;
+      transform: rotate(45deg);
+    }
+
+    /* 斜線/ */
+    .row-up .row:nth-child(1) .col:nth-child(5)::before,
+    .row-up .row:nth-child(2) .col:nth-child(4)::before {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 140px;
+      border-top: 1px solid black;
+      transform-origin: right top;
+      transform: rotate(-45deg);
+    }
+
+    /* 斜線(下游) 讓偽元素定位 */
     .row-down .row:nth-child(3) .col:nth-child(4),
-    .row-down .row:nth-child(3) .col:nth-child(5){
-      background-color: pink;
-      /* transform: skew(49deg) */
-    }
+    .row-down .row:nth-child(3) .col:nth-child(5),
     .row-down .row:nth-child(4) .col:nth-child(4),
-    .row-down .row:nth-child(4) .col:nth-child(5){
-      background-color: pink;
-      /* transform: skew(49deg) */
+    .row-down .row:nth-child(4) .col:nth-child(5) {
+      position: relative;
+    }
+
+    /* 斜線\ */
+    .row-down .row:nth-child(3) .col:nth-child(4)::before,
+    .row-down .row:nth-child(4) .col:nth-child(5)::before {
+      content: '';
+      position: absolute;
+      width: 140px;
+      border-top: 1px solid black;
+      transform-origin: left top;
+      transform: rotate(45deg);
+    }
+
+    /* 斜線/ */
+    .row-down .row:nth-child(3) .col:nth-child(5)::before,
+    .row-down .row:nth-child(4) .col:nth-child(4)::before{
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 140px;
+      border-top: 1px solid black;
+      transform-origin: right top;
+      transform: rotate(-45deg);
     }
   </style>
 </head>
+
 <body>
   <div class="container">
     <div class="left">
       <p>棋盤裡，車無輪，馬無疆，叫聲將軍堤防堤防</p>
     </div>
-<!-- 中間棋盤 -->
+    <!-- 中間棋盤 -->
     <div class="center">
       <div class="inside">
         <!-- 上 -->
@@ -131,8 +195,8 @@
             <div class="col"></div>
             <div class="col"></div>
             <div class="col"></div>
-            <div class="col">1</div>
-            <div class="col">2</div>
+            <div class="col"></div>
+            <div class="col"></div>
             <div class="col"></div>
             <div class="col"></div>
             <div class="col"></div>
@@ -141,8 +205,8 @@
             <div class="col"></div>
             <div class="col"></div>
             <div class="col"></div>
-            <div class="col">3</div>
-            <div class="col">4</div>
+            <div class="col"></div>
+            <div class="col"></div>
             <div class="col"></div>
             <div class="col"></div>
             <div class="col"></div>
@@ -172,10 +236,10 @@
         <div class="row-river">
           <div class="row">
             <div class="col-river" style="border-left: 1px solid black"></div>
-              <div class="text-river">
-                <p>楚河</p>
-                <p>漢界</p>
-              </div>
+            <div class="text-river">
+              <p>楚河</p>
+              <p>漢界</p>
+            </div>
           </div>
         </div>
         <!-- 下 -->
@@ -183,7 +247,7 @@
           <div class="row">
             <div class="col top"></div>
             <div class="col top"></div>
-            <div class="col top" ></div>
+            <div class="col top"></div>
             <div class="col top"></div>
             <div class="col top"></div>
             <div class="col top"></div>
@@ -204,8 +268,8 @@
             <div class="col"></div>
             <div class="col"></div>
             <div class="col"></div>
-            <div class="col">1</div>
-            <div class="col">2</div>
+            <div class="col"></div>
+            <div class="col"></div>
             <div class="col"></div>
             <div class="col"></div>
             <div class="col"></div>
@@ -214,8 +278,8 @@
             <div class="col"></div>
             <div class="col"></div>
             <div class="col"></div>
-            <div class="col">3</div>
-            <div class="col">4</div>
+            <div class="col"></div>
+            <div class="col"></div>
             <div class="col"></div>
             <div class="col"></div>
             <div class="col"></div>
@@ -230,4 +294,5 @@
 
   </div>
 </body>
+
 </html>
