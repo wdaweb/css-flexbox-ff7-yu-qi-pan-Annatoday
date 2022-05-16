@@ -17,51 +17,50 @@
       padding: 0;
       list-style: 0;
       box-sizing: border-box;
+      font-family: '標楷體';
     }
 
-    html,
+    /* html,
     body {
+      border: 10px solid blue;
       height: 100vh;
       display: flex;
       flex-direction: row;
-      /* 置中 */
       justify-content: center;
       align-items: center;
-      font-family: "標楷體";
-
-    }
+    } */
 
     .container {
       /* border: 1px solid black; */
-      width: 1250px;
-      height: 1200px;
+      /* 可視範圍100%，不用在html，body(父元素)上設hight:100% */
+      width: 100vw;
+      height: 100vh;
 
       display: flex;
-      justify-content: space-between;
-      /* 從左右文字置中 */
-      align-items: center
+      justify-content: center;
+      align-items: center;
     }
 
     .center {
       border: 1px solid black;
-      width: 1000px;
-      height: 1040px;
+      width: 500px;
+      height: 520px;
 
       display: flex;
-      justify-content: center;
       /* 子元素(內棋盤)置中 */
+      justify-content: center;
       align-items: center;
     }
 
-    /* 各自都是彈性盒 */
+    /* 都彈性盒 */
     .left,
     .right {
       /* border: 1px solid pink; */
-      width: 100px;
-      height: 1200px;
+      width: 50px;
+      height: 600px;
       /* 文字垂直後 流向變column */
       writing-mode: vertical-lr;
-      font-size: 3.4rem;
+      font-size: 1.7rem;
 
       display: flex;
       justify-content: center;
@@ -69,29 +68,58 @@
     }
 
     .inside {
-      width: 800px;
-      height: 900px;
+      width: 400px;
+      height: 450px;
       /* 棋盤格外框上+右 */
       border-right: 1px solid black;
       border-top: 1px solid black;
     }
 
-    /* 準備給上黑棋 */
-    .row-up {
+    /* 
+      分上下盤實驗切:需再調整定位較複雜
+      .chess_up{
+      background-color: aquamarine;
+      border: 1px solid pink;
+      position: absolute;
+      left: 50%;
+      
+      top: 32%;
+      transform: translate(-50%,-32%);
       width: 800px;
-      height: 400px;
-      /* border: 1px solid green; */
+      height: 420px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      
     }
-
-    .row {
+    .car{
+      border: 1px solid orange;
       width: 800px;
       height: 100px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .bo{
+      border: 1px solid purple;
+      width: 800px;
+      height: 100px;
+      display: flex;
+      margin-top: 15%;
+    }
+    .zu{
+      border: 1px solid green;
+      width: 800px;
+      height: 100px;
+    } */
+    .row {
+      width: 400px;
+      height: 50px;
       display: flex;
     }
 
     .col {
-      width: 100px;
-      height: 100px;
+      width: 50px;
+      height: 50px;
       /* 棋盤格內框左+下 */
       border-left: 1px solid black;
       border-bottom: 1px solid black;
@@ -103,13 +131,17 @@
     }
 
     .text-river {
-      font-size: 4rem;
-      width: 800px;
+      font-size: 2rem;
+      width: 400px;
 
       display: flex;
       justify-content: space-around;
       /* 楚河漢界置中 */
       align-items: center;
+    }
+    /* 補線 */
+    .col-river{
+      border-left: 1px solid black;
     }
 
     /* 斜線(上游) 讓偽元素定位 */
@@ -121,27 +153,27 @@
     }
 
     /* 斜線\ */
-    .row-up .row:nth-child(1) .col:nth-child(4)::before,
-    .row-up .row:nth-child(2) .col:nth-child(5)::before {
+    .row-up .row:nth-child(1) .col:nth-child(4)::after,
+    .row-up .row:nth-child(2) .col:nth-child(5)::after {
       content: '';
       position: absolute;
-      /* why不需高度也沒影響=> border粗細已設定?*/
+      /* 不需高度也沒影響=> border粗細已設定 */
       /* height: 500px; */
-      width: 140px;
+      width: 70px;
       border-top: 1px solid black;
       /* 旋轉原點 */
       transform-origin: left top;
       transform: rotate(45deg);
     }
 
-    /* 斜線/ */
-    .row-up .row:nth-child(1) .col:nth-child(5)::before,
-    .row-up .row:nth-child(2) .col:nth-child(4)::before {
+    /* 斜線 / */
+    .row-up .row:nth-child(1) .col:nth-child(5)::after,
+    .row-up .row:nth-child(2) .col:nth-child(4)::after {
       content: '';
       position: absolute;
       right: 0;
       top: 0;
-      width: 140px;
+      width: 70px;
       border-top: 1px solid black;
       transform-origin: right top;
       transform: rotate(-45deg);
@@ -155,28 +187,74 @@
       position: relative;
     }
 
-    /* 斜線\ */
-    .row-down .row:nth-child(3) .col:nth-child(4)::before,
-    .row-down .row:nth-child(4) .col:nth-child(5)::before {
+    /* 斜線 \ */
+    .row-down .row:nth-child(3) .col:nth-child(4)::after,
+    .row-down .row:nth-child(4) .col:nth-child(5)::after {
       content: '';
       position: absolute;
-      width: 140px;
+      width: 70px;
       border-top: 1px solid black;
       transform-origin: left top;
       transform: rotate(45deg);
     }
 
     /* 斜線/ */
-    .row-down .row:nth-child(3) .col:nth-child(5)::before,
-    .row-down .row:nth-child(4) .col:nth-child(4)::before{
+    .row-down .row:nth-child(3) .col:nth-child(5)::after,
+    .row-down .row:nth-child(4) .col:nth-child(4)::after{
       content: '';
       position: absolute;
       right: 0;
       top: 0;
-      width: 140px;
+      width: 70px;
       border-top: 1px solid black;
       transform-origin: right top;
       transform: rotate(-45deg);
+    }
+    .air_box1{
+      /* border: 1px solid pink; */
+      position: absolute;
+      width: 440px;
+      height: 490px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .air_box1_top{
+      width: 440px;
+      height: 50px;
+      /* border: 1px solid green; */
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    .air_box1_bottom{
+      width: 440px;
+      height: 50px;
+      /* border: 1px solid green; */
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    .black_chess{
+      border: 1px solid black;
+      border-radius: 50%;
+      background-color: white;
+      font-size: 1.7rem;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+    }
+    .red_chess{
+      color: rgb(234, 24, 24);
+      border: 1px solid black;
+      border-radius: 50%;
+      background-color: white;
+      font-size: 1.7rem;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
     }
   </style>
 </head>
@@ -235,7 +313,7 @@
         <!-- 中 楚河漢界 -->
         <div class="row-river">
           <div class="row">
-            <div class="col-river" style="border-left: 1px solid black"></div>
+            <div class="col-river"></div>
             <div class="text-river">
               <p>楚河</p>
               <p>漢界</p>
@@ -287,6 +365,60 @@
         </div>
       </div>
     </div>
+
+    <div class="air_box1">
+      <div class="air_box1_top">
+        <div class="black_chess">車</div>
+        <div class="black_chess">馬</div>
+        <div class="black_chess">象</div>
+        <div class="black_chess">士</div>
+        <div class="black_chess">將</div>
+        <div class="black_chess">士</div>
+        <div class="black_chess">象</div>
+        <div class="black_chess">馬</div>
+        <div class="black_chess">車</div>
+      </div>
+      <div class="air_box1_bottom">
+        <div class="red_chess">俥</div>
+        <div class="red_chess">傌</div>
+        <div class="red_chess">相</div>
+        <div class="red_chess">仕</div>
+        <div class="red_chess">帥</div>
+        <div class="red_chess">仕</div>
+        <div class="red_chess">相</div>
+        <div class="red_chess">傌</div>
+        <div class="red_chess">俥</div>
+      </div>
+    </div>
+    <div class="air_box2"></div>
+    <div class="air_box3"></div>
+
+
+    <!-- <div class="chess_up">
+      <div class="car">
+        <div class="black_chess">車</div>
+        <div class="black_chess">馬</div>
+        <div class="black_chess">象</div>
+        <div class="black_chess">士</div>
+        <div class="black_chess">將</div>
+        <div class="black_chess">士</div>
+        <div class="black_chess">象</div>
+        <div class="black_chess">馬</div>
+        <div class="black_chess">車</div>
+      </div>
+      <div class="bo">
+        <div class="black_chess">包</div>
+        <div class="black_chess">炮</div>
+      </div>
+      <div class="zu">
+        <div class="black_chess">卒</div>
+        <div class="black_chess">卒</div>
+        <div class="black_chess">卒</div>
+        <div class="black_chess">卒</div>
+        <div class="black_chess">卒</div>
+      </div>
+    </div>
+    <div class="chess-down"></div> -->
 
     <div class="right">
       <p>圖畫裡，龍不吟，虎不嘯，小小書僮可笑可笑</p>
