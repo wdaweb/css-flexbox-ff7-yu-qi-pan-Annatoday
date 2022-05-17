@@ -10,7 +10,7 @@
     /* 原本架構: 左右文字拉出container，做flex，後來練習也包進去
     發現文字垂直writing-mode後，Flex 元件流向也會跟著改變 : writing-mode: vertical-lr = flex-direction: column
     or 直接用h1做也可以(注意h1自帶設定還在) */
-    /* 總寬度再計算 */
+    /* 總寬度再計算，需整理 */
 
     * {
       margin: 0;
@@ -43,7 +43,7 @@
 
     .center {
       border: 1px solid black;
-      width: 500px;
+      width: 480px;
       height: 520px;
 
       display: flex;
@@ -56,7 +56,7 @@
     .left,
     .right {
       /* border: 1px solid pink; */
-      width: 50px;
+      width: 80px;
       height: 600px;
       /* 文字垂直後 流向變column */
       writing-mode: vertical-lr;
@@ -145,16 +145,16 @@
     }
 
     /* 斜線(上游) 讓偽元素定位 */
-    .row-up .row:nth-child(1) .col:nth-child(4),
-    .row-up .row:nth-child(1) .col:nth-child(5),
-    .row-up .row:nth-child(2) .col:nth-child(4),
-    .row-up .row:nth-child(2) .col:nth-child(5) {
+    .row-top .row:nth-child(1) .col:nth-child(4),
+    .row-top .row:nth-child(1) .col:nth-child(5),
+    .row-top .row:nth-child(2) .col:nth-child(4),
+    .row-top .row:nth-child(2) .col:nth-child(5) {
       position: relative;
     }
 
     /* 斜線\ */
-    .row-up .row:nth-child(1) .col:nth-child(4)::after,
-    .row-up .row:nth-child(2) .col:nth-child(5)::after {
+    .row-top .row:nth-child(1) .col:nth-child(4)::after,
+    .row-top .row:nth-child(2) .col:nth-child(5)::after {
       content: '';
       position: absolute;
       /* 不需高度也沒影響=> border粗細已設定 */
@@ -167,8 +167,8 @@
     }
 
     /* 斜線 / */
-    .row-up .row:nth-child(1) .col:nth-child(5)::after,
-    .row-up .row:nth-child(2) .col:nth-child(4)::after {
+    .row-top .row:nth-child(1) .col:nth-child(5)::after,
+    .row-top .row:nth-child(2) .col:nth-child(4)::after {
       content: '';
       position: absolute;
       right: 0;
@@ -180,16 +180,16 @@
     }
 
     /* 斜線(下游) 讓偽元素定位 */
-    .row-down .row:nth-child(3) .col:nth-child(4),
-    .row-down .row:nth-child(3) .col:nth-child(5),
-    .row-down .row:nth-child(4) .col:nth-child(4),
-    .row-down .row:nth-child(4) .col:nth-child(5) {
+    .row-bottom .row:nth-child(3) .col:nth-child(4),
+    .row-bottom .row:nth-child(3) .col:nth-child(5),
+    .row-bottom .row:nth-child(4) .col:nth-child(4),
+    .row-bottom .row:nth-child(4) .col:nth-child(5) {
       position: relative;
     }
 
     /* 斜線 \ */
-    .row-down .row:nth-child(3) .col:nth-child(4)::after,
-    .row-down .row:nth-child(4) .col:nth-child(5)::after {
+    .row-bottom .row:nth-child(3) .col:nth-child(4)::after,
+    .row-bottom .row:nth-child(4) .col:nth-child(5)::after {
       content: '';
       position: absolute;
       width: 70px;
@@ -199,8 +199,8 @@
     }
 
     /* 斜線/ */
-    .row-down .row:nth-child(3) .col:nth-child(5)::after,
-    .row-down .row:nth-child(4) .col:nth-child(4)::after{
+    .row-bottom .row:nth-child(3) .col:nth-child(5)::after,
+    .row-bottom .row:nth-child(4) .col:nth-child(4)::after{
       content: '';
       position: absolute;
       right: 0;
@@ -210,6 +210,30 @@
       transform-origin: right top;
       transform: rotate(-45deg);
     }
+    /* 棋子 */
+    .black_chess{
+      border: 1px solid black;
+      border-radius: 50%;
+      background-color: white;
+      font-size: 1.7rem;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+    }
+    .red_chess{
+      color: rgb(234, 24, 24);
+      border: 1px solid black;
+      border-radius: 50%;
+      background-color: white;
+      font-size: 1.7rem;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+    }
+    /* 棋子flex */
+    /* 棋子最外層 */
     .air_box1{
       /* border: 1px solid pink; */
       position: absolute;
@@ -235,26 +259,58 @@
       justify-content: space-between;
       align-items: flex-end;
     }
-    .black_chess{
-      border: 1px solid black;
-      border-radius: 50%;
-      background-color: white;
-      font-size: 1.7rem;
-      width: 40px;
-      height: 40px;
-      line-height: 40px;
-      text-align: center;
+    /* 棋子第二層 */
+    .air_box2{
+      /* border: 1px solid pink; */
+      position: absolute;
+      width: 340px;
+      height: 290px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
-    .red_chess{
-      color: rgb(234, 24, 24);
-      border: 1px solid black;
-      border-radius: 50%;
-      background-color: white;
-      font-size: 1.7rem;
-      width: 40px;
-      height: 40px;
-      line-height: 40px;
-      text-align: center;
+    .air_box2_top{
+      width: 340px;
+      height: 50px;
+      /* border: 1px solid green; */
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    .air_box2_bottom{
+      width: 340px;
+      height: 50px;
+      /* border: 1px solid green; */
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    /* 棋子最內層 */
+    .air_box3{
+      /* border: 1px solid pink; */
+      position: absolute;
+      width: 440px;
+      height: 190px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .air_box3_top{
+      width: 440px;
+      /* 彈性盒會自動填滿 */
+      /* height: 50px; */
+      /* border: 1px solid green; */
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    .air_box3_bottom{
+      width: 440px;
+      /* height: 50px; */
+      /* border: 1px solid green; */
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
     }
   </style>
 </head>
@@ -268,7 +324,7 @@
     <div class="center">
       <div class="inside">
         <!-- 上 -->
-        <div class="row-up">
+        <div class="row-top">
           <div class="row">
             <div class="col"></div>
             <div class="col"></div>
@@ -321,7 +377,7 @@
           </div>
         </div>
         <!-- 下 -->
-        <div class="row-down">
+        <div class="row-bottom">
           <div class="row">
             <div class="col top"></div>
             <div class="col top"></div>
@@ -365,7 +421,7 @@
         </div>
       </div>
     </div>
-
+    <!-- 棋子隱形定位，裡面再分上下兩條彈性盒 -->
     <div class="air_box1">
       <div class="air_box1_top">
         <div class="black_chess">車</div>
@@ -390,10 +446,33 @@
         <div class="red_chess">俥</div>
       </div>
     </div>
-    <div class="air_box2"></div>
-    <div class="air_box3"></div>
-
-
+    <div class="air_box2">
+      <div class="air_box2_top">
+        <div class="black_chess">包</div>
+        <div class="black_chess">包</div>
+      </div>
+      <div class="air_box2_bottom">
+        <div class="red_chess">炮</div>
+        <div class="red_chess">炮</div>
+      </div>
+    </div>
+    <div class="air_box3">
+      <div class="air_box3_top">
+        <div class="black_chess">卒</div>
+        <div class="black_chess">卒</div>
+        <div class="black_chess">卒</div>
+        <div class="black_chess">卒</div>
+        <div class="black_chess">卒</div>
+      </div>
+      <div class="air_box3_bottom">
+        <div class="red_chess">兵</div>
+        <div class="red_chess">兵</div>
+        <div class="red_chess">兵</div>
+        <div class="red_chess">兵</div>
+        <div class="red_chess">兵</div>
+      </div>
+    </div>
+    <!-- 嘗試上下分開 -->
     <!-- <div class="chess_up">
       <div class="car">
         <div class="black_chess">車</div>
