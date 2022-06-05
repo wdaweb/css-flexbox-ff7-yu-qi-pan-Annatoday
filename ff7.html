@@ -8,11 +8,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
   <style>
     /* 人物圖片一個% 一個px 實驗跑版(未) */
-    /* h1一個用% 一個px 實驗跑版 => 文字不影響(px即可)*/
+    /* h1一個用% 一個px 實驗跑版 => 文字不影響(px是固定的)*/
     /* 嘗試偽元素當遮罩，原是inline轉型block會出現。未脫離流向，會擠開其他元素，未定位Z-index也失效(Z-index僅能在定位元素上奏效)。
        改用漸層，記得順序位置(圖畫紙) */
-    /* 人物嘗試不同方式做，cloud:flex,tifa:背景 */
-    /* 剩: 選擇器? 文字顏色、字型、h1跟p */
+    /* 人物嘗試不同方式做，cloud:flex=>無法。tifa:背景 */
+    /* 失敗? 選擇器:文字顏色、h1跟p */
     *{
       margin: 0;
       padding: 0;
@@ -58,17 +58,21 @@
       align-items: center;
     }
     .left img{
-      width: 260px;
-      height: 400px;
+      width: 200px;
+      /* 寬高則一，不然畫質會跑 */
+      /* height: 400px; */
     }
-    .left h1, p{
-      color: pink ; 
-    }
+    /* 沒辦法寫在一起...... */
+    /* .left .card > p~h1{
+      color: white ; 
+    } */
     .left .card h1{
-      font-size: 50px;
+      color: white;
+      font-size: 45px;
     }
     .left .card p{
-      font-size: 25px;
+      color: white;
+      font-size: 20px;
       margin: 5px;
       width: 70%;
       /* 改center? */
@@ -98,21 +102,22 @@
       flex-wrap: wrap;
     }
     .boy img{
+      /* border: 1px solid gold; */
       width: 38%;
       height: 100%;
-
-      align-self: flex-end;
-      margin-bottom: -50px;
-      /* flex-shrink: 1; 研究中*/
+      /* align-self: flex-end; 若變彈性盒就無法移動了*/
+      /* 彈性盒用margin已推不開，改padding */
+      margin-top: 20px;
+      margin-left: -25px;
     }
     .boy h1{
       /* color: green; */
-      margin-left: 5%;
-      font-size: 50px;
+      margin-left: 48px;
+      font-size: 45px;
     }
     .boy p{
       margin-left: 50px;
-      font-size: 25px;
+      font-size: 20px;
       width: 57%;
     }
     
@@ -133,11 +138,12 @@
     }
     .girl h1 {
       color: white;
-      font-size: 50px;
+      font-size: 45px;
       margin-left: 34%;
     }
     .girl p{
-      font-size: 25px;
+      color: white;
+      font-size: 20px;
       width: 60%;
       margin-left: 34%;
     }
@@ -167,7 +173,7 @@
       <div class="card">
         <div class="girl">
           <h1>Tifa</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam accusantium soluta facere doloribus saepe nemo ab laudantium voluptatem magnam sit, laborum excepturi veniam amet reiciendis dolores quis explicabo exercitationem nihil.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam accusantium soluta facere doloribus saepe nemo ab laudantium voluptatem magnam sit, laborum excepturi veniam amet reiciendis dolores quis explicabo nihil.</p>
           <!-- <img src="./homework_ff7/tifa.png" alt="Tifa"> -->
         </div>
       </div>
